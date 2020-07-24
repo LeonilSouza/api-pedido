@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import io.github.leonilsouza.apipedido.domain.enums.EstadoPagamento;
 
 @Entity
@@ -25,11 +27,12 @@ public class PagamentoComBoleto extends Pagamento{
 	public Date getDataVencimento() {
 		return dataVencimento;
 	}
-
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	public void setDataVencimento(Date dataVencimento) {
 		this.dataVencimento = dataVencimento;
 	}
 
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	public Date getDataPagamento() {
 		return dataPagamento;
 	}
