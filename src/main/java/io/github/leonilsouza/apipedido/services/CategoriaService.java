@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import io.github.leonilsouza.apipedido.domain.Categoria;
+import io.github.leonilsouza.apipedido.dto.CategoriaDTO;
 import io.github.leonilsouza.apipedido.repositories.CategoriaRepository;
 import io.github.leonilsouza.apipedido.services.exceptions.DataIntegrityException;
 import io.github.leonilsouza.apipedido.services.exceptions.ObjectNotFoundException;
@@ -53,6 +54,10 @@ public class CategoriaService {
 	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
+	}
+	
+	public Categoria fromDTO(CategoriaDTO objDTO) {
+		return new Categoria(objDTO.getId(), objDTO.getNome());
 	}
 
 }
