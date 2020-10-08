@@ -4,6 +4,7 @@ package io.github.leonilsouza.apipedido.resources;
  import java.util.List;
  import java.util.stream.Collectors;
 
+<<<<<<< HEAD
  import org.springframework.beans.factory.annotation.Autowired;
  import org.springframework.data.domain.Page;
  import org.springframework.http.ResponseEntity;
@@ -14,6 +15,18 @@ package io.github.leonilsouza.apipedido.resources;
  import org.springframework.web.bind.annotation.RequestParam;
  import org.springframework.web.bind.annotation.RestController;
  import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+=======
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+>>>>>>> 16ff9f4efd83836cf8e62bbfda0ec049b8862944
 
  import io.github.leonilsouza.apipedido.domain.Categoria;
  import io.github.leonilsouza.apipedido.dto.CategoriaDTO;
@@ -60,6 +73,7 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
+<<<<<<< HEAD
 	 @RequestMapping(value="/page", method= RequestMethod.GET)
 	 public ResponseEntity<Page<CategoriaDTO>> findPage(
 			 @RequestParam(value="page", defaultValue = "0") Integer page,
@@ -70,4 +84,16 @@ public class CategoriaResource {
 		 Page<CategoriaDTO> listDto = list.map(obj -> new CategoriaDTO(obj));
 		 return ResponseEntity.ok().body(listDto);
 	 }
+=======
+	@RequestMapping(value="/page", method= RequestMethod.GET)
+	public ResponseEntity<Page<CategoriaDTO>> findPage(
+			@RequestParam(value="page", defaultValue = "0") Integer page,
+			@RequestParam(value="linesPerPage", defaultValue = "24") Integer linesPerPage, 
+			@RequestParam(value="orderBy", defaultValue = "nome") String orderBy, 
+			@RequestParam(value="direction", defaultValue = "ASC") String direction) {
+		Page<Categoria> list = service.findPage(page, linesPerPage, orderBy, direction);
+		Page<CategoriaDTO> listDto = list.map(obj -> new CategoriaDTO(obj));
+		return ResponseEntity.ok().body(listDto);
+	}
+>>>>>>> 16ff9f4efd83836cf8e62bbfda0ec049b8862944
 }
