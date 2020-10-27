@@ -17,7 +17,7 @@
 	<packaging>jar</packaging>
 	<name>api-pedido</name>
 	<description>Api project for Spring Boot</description>
-	
+
 
 	<properties>
 		<java.version>11</java.version>
@@ -81,6 +81,16 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+
+				<configuration>
+					<verbose>true</verbose>
+					<fork>true</fork>
+					<executable>${java.home}</executable>
+					<compilerVersion>1.8</compilerVersion>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+
 			</plugin>
 		</plugins>
 	</build>
