@@ -15,11 +15,14 @@ import org.springframework.transaction.annotation.Transactional;
 import io.github.leonilsouza.apipedido.domain.Cidade;
 import io.github.leonilsouza.apipedido.domain.Cliente;
 import io.github.leonilsouza.apipedido.domain.Endereco;
+import io.github.leonilsouza.apipedido.domain.enums.Perfil;
 import io.github.leonilsouza.apipedido.domain.enums.TipoCliente;
 import io.github.leonilsouza.apipedido.dto.ClienteDTO;
 import io.github.leonilsouza.apipedido.dto.ClienteNewDTO;
 import io.github.leonilsouza.apipedido.repositories.ClienteRepository;
 import io.github.leonilsouza.apipedido.repositories.EnderecoRepository;
+import io.github.leonilsouza.apipedido.security.UserSS;
+import io.github.leonilsouza.apipedido.services.exceptions.AuthorizationException;
 import io.github.leonilsouza.apipedido.services.exceptions.DataIntegrityException;
 import io.github.leonilsouza.apipedido.services.exceptions.ObjectNotFoundException;
 
@@ -36,6 +39,12 @@ public class ClienteService {
 	private BCryptPasswordEncoder pe;
 
 	public Cliente find(Integer id) {
+		
+		UserSS user = UserService.authenticated();
+		if (user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
