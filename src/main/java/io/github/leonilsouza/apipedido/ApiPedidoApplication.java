@@ -1,17 +1,11 @@
 package io.github.leonilsouza.apipedido;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import io.github.leonilsouza.apipedido.services.S3Service;
-
 @SpringBootApplication
 public class ApiPedidoApplication implements CommandLineRunner {
-
-	@Autowired
-	private S3Service s3Service;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiPedidoApplication.class, args);
@@ -19,7 +13,6 @@ public class ApiPedidoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		s3Service.uploadFile("C:\\temp\\fotos\\grandetemplo.jpg");
 	}
 
 }
