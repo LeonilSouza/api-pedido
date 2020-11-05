@@ -41,9 +41,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			"/h2-console/**",
 	};
 
-	private static final String[] PUBLIC_MATCHERS_GET = {
+	private static final String[] PUBLIC_MATCHERS_GET = { // Libera sem precisar de Token
 			"/produtos/**",
-			"/categorias/**"
+			"/categorias/**",
+			"/estados/**"
 	};
 	
 	private static final String[] PUBLIC_MATCHERS_POST = {
